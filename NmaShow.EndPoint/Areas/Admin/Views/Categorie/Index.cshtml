@@ -1,0 +1,54 @@
+﻿@model List<NamaShow.Core.VeiwModels.CategorieForAdmin.IndexCategorieForAdmin>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@section Styles{
+    <style>
+    </style>
+}
+
+<div class="card-body ">
+    <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " href="Create">Create New</a></h4>
+    <h4 class="card-title">All Categories</h4>
+
+
+    <table class="table table-striped ">
+        <thead>
+            <tr>
+                <th> Title </th>
+                <th> Edit </th>
+                <th> Delete </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+
+                    <td> @item.Title </td>
+                    <td>
+                        <a href="Edit?id=@item.Id">Edit</a>
+                    </td>
+                    <td> <a href="Delete?id=@item.Id">Delete</a></td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+
+    </script>
+}

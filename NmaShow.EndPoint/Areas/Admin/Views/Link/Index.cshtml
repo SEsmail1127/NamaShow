@@ -1,0 +1,44 @@
+﻿@model IEnumerable<NamaShow.Core.VeiwModels.Movie.MovieLink.IndexOfLinkForMovie>
+
+@{
+    ViewData["Title"] = "Index";
+    int x = ViewBag.MovieId;
+}
+
+<div class="card-body">
+    <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " href="Create?id=@x">Create New</a></h4>
+    <h4 class="card-title">All Users</h4>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Name </th>
+                <th> Show </th>
+                <th> price </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td> @item.LinkName </td>
+                    <td>
+                        @item.Show
+                    </td>
+
+                    <td> @item.Price </td>
+                    <td>
+                        <a href="Edit?id=@item.Id"> Edit </a>
+
+                        <a class="text-danger" href="Delete?id=@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

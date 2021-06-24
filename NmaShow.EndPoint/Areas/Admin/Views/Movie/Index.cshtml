@@ -1,0 +1,70 @@
+﻿@model IEnumerable<NamaShow.Core.VeiwModels.MovieForAdminVM.IndexMovieForAdmin>
+@using NamaShow.DataLayer.Entities.Movie
+@{
+    ViewData["Title"] = "Index";
+    var x = ViewBag.MovieId;
+}
+<div class="card-body">
+    <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " href="~/Admin/Movie/Create?id=@x">Create New</a></h4>
+    <h4 class="card-title">All Movies</h4>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Picture </th>
+                <th> Title </th>
+                <th> ReleseTime </th>
+                <th> Show </th>
+                <th> Edit </th>
+                <th> Delete </th>
+                <th></th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td class="py-1">
+                        <img class="img-fluid" src="~/MovieFile/moviePicture/MoviePictureForList/@item.MoviePicture">
+                    </td>
+                    <td> @item.Title </td>
+                    <td>
+                        @item.releaseTime
+                    </td>
+
+                    <td>@item.Show </td>
+                    <td>
+                        <a href="Edit?id=@item.MovieId"> Edit </a>
+                    </td>
+                    <td>
+                        <a class="text-danger" href="Delete?id=@item.MovieId">Delete</a>
+                    </td>
+                    <td>
+                        @{ if (item.MovieType == MovieType.Movie)
+                            {
+                                <a class="text-danger" href="~/Admin/Link/Index?id=@item.MovieId">Links</a>
+                            }
+                            else if (item.MovieType == MovieType.Serial)
+                            {
+                                <a class="text-danger" href="~/Admin/Session/Index?id=@item.MovieId">Sessions</a>
+                            }
+                            else if (item.MovieType == MovieType.Collection)
+                            {
+                                <a class="text-danger" href="~/Admin/Movie/Index?id=@item.MovieId">Movies</a>
+                            }
+                            else if (item.MovieType == MovieType.Trailer)
+                            {
+                                <a class="text-danger" href="~/Admin/Link/Index?id=@item.MovieId">Linls</a>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

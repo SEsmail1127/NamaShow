@@ -1,0 +1,40 @@
+﻿@model NamaShow.Core.VeiwModels.CategorieForAdmin.CreateCategorieForAdmin
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " asp-action="Index">Index</a></h4>
+                        <h4 class="card-title">Create Categorie</h4>
+
+                        <form asp-action="Create" method="post" class="forms-sample">
+                            <span style="color:#ff009c;font-size:12px;">@ViewBag.msg</span>
+
+                            <div class="form-group">
+                                <label for="exampleInputName1">Title</label>
+                                <input type="text" class="form-control" asp-for="Title" placeholder="Categorie Title">
+                                <span class="validate-color" asp-validation-for="Title"></span>
+                            </div>
+
+                         <input type="hidden"asp-for="ParentId" />
+
+
+                            <button class="btn btn-success mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

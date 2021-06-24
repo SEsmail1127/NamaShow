@@ -1,0 +1,51 @@
+﻿@model List<NamaShow.Core.VeiwModels.Slider.IndexSliderForAdmin>
+
+@{
+    ViewData["Title"] = "Index";
+   
+}
+<div class="card-body">
+    <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " href="~/Admin/Slider/Create">Create New</a></h4>
+    <h4 class="card-title">All Slider</h4>
+
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Picture </th>
+                <th> Order </th>            
+                <th> Show </th>
+                <th> Edit </th>
+                <th> Delete </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td class="py-1">
+                        <img class="img-fluid" src="~/MovieFile/moviePicture/MoviePictureForList/@item.Picture">
+                    </td>
+                    <td> @item.Order </td>
+                    <td>
+                        @item.Show
+                    </td>
+
+         
+                    <td>
+                        <a href="~/Admin/Slider/Edit?id=@item.SlideId"> Edit </a>
+                    </td>
+                    <td>
+                        <a class="text-danger" href="~/Admin/Slider/Delete?id=@item.SlideId">Delete</a>
+                    </td>
+                  
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

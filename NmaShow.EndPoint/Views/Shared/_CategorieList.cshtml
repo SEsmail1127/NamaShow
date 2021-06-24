@@ -1,0 +1,27 @@
+﻿@using NamaShow.Core.Services.InterFaces
+@inject ICategorieService CategorieService
+@{
+    var Model = CategorieService.ListOfCategorieForAdmin();
+}
+
+<div class="row">
+    <div class="col-4">
+        <table class="table table-striped">
+            
+            <thead>
+                <tr>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="font-size:12px;color:palevioletred">
+                            <input type="checkbox"  style="font-size:12px;color:palevioletred" value="@item.Id" name="catMovie" /> @item.Title
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

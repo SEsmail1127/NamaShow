@@ -1,0 +1,122 @@
+﻿@model NamaShow.Core.VeiwModels.UserViewModelForAdmin.CreateUserByAdmin
+@using NamaShow.DataLayer.Entities
+@using NamaShow.Core.Services.InterFaces;
+@inject IPermissionService PermissionService;
+@{
+    ViewData["Title"] = "Create";
+
+    List<Role> x = PermissionService.GetListOfRole();
+}
+@section Styles{ 
+   
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " asp-action="Index">Index</a></h4>
+                        <h4 class="card-title">Create User</h4>
+
+                        <form asp-action="Create" method="post" class="forms-sample" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="exampleInputName1">UserName</label>
+                                <input type="text" class="form-control" asp-for="Username" placeholder="UserName">
+                                <span class="validate-color" asp-validation-for="Username"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Email address</label>
+                                <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                                <span class="validate-color" asp-validation-for="Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Password</label>
+                                <input type="password" class="form-control" asp-for="Password" placeholder="Password">
+                                <span class="validate-color" asp-validation-for="Password"></span>
+                            </div>
+                            <div class="form-group">
+                                <label>File upload</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input type="file" style="display:none;" asp-for="UserPicture" id="UserPicture">
+                                    <span class="input-group-append">
+                                        <label class="file-upload-browse btn btn-info" for="UserPicture" type="button">Upload</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Name</label>
+                                <input type="text" class="form-control" asp-for="Name" placeholder="Name">
+                                <span class="validate-color" asp-validation-for="Name"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Family</label>
+                                <input type="text" class="form-control" asp-for="Family" placeholder="Family">
+                                <span class="validate-color" asp-validation-for="Family"></span>
+                            </div>
+                            @{
+                                foreach (var item in x)
+                                {
+                                    <div class="custom-checkbox">
+                                        <label>
+                                            <input type="checkbox" name="UserRoles" value="@item.RoleId" />    @item.Title
+                                        </label>
+                                    </div>
+                                }
+                            }
+
+                            <button class="btn btn-success mr-2">Submit</button>
+                            <button class="btn btn-light">Cancel</button>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <img id="imgAvatar" class="img-fluid" style="display:block;" src"#" />
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#UserPicture").change(function () {
+            readURL(this);
+        });
+    </script>
+}

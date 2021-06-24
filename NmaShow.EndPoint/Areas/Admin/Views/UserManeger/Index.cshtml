@@ -1,0 +1,86 @@
+﻿
+@model NamaShow.Core.VeiwModels.UserViewModelForAdmin.IndexUserForAdmin;
+
+@{
+    ViewData["Title"] = "لیست کاربران";
+}
+@section Styles{
+
+}
+
+<div class="card-body">
+    <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " asp-action="Create">Create New</a></h4>
+    <h4 class="card-title">All Users</h4>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> User </th>
+                <th> UserName </th>
+                <th> Email </th>
+                <th> FullName </th>
+                <th> RegisterDate </th>
+                <th>IsActive</th>
+                <th>Edit & Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+
+
+                <tr>
+                    <td class="py-1">
+                        <img class="img-fluid" src="~/UserPic/UserAvatarForList/@item.UserPicture">
+                    </td>
+                    <td> @item.Username </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td> @item.Name    @item.Family </td>
+                    <td> @item.RegisterDate </td>
+                    <td>@item.IsActive </td>
+                    <td><a href="Edit?id=@item.UserId"> Edit </a>        
+                    
+                    <a class="text-danger" href="Delete?id=@item.UserId">Delete</a> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   
+    
+    <div>
+        <br />
+        <br />
+        <br />
+
+        <nav style="display:inline-flex;align-items: center;">
+            <ul class=" pagination" style="">
+
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <li  class="page-item @((Model.CurrentPage == i) ? "active" : "")"   >
+                        <a class="btn btn-inverse-outline-info " href="Index?Page=@i">@i </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+        @*<ul class="pagination">
+            <li class="page-item disabled">
+                <span class="page-link">Previous</span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active">
+                <span class="page-link">
+                    2
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>*@
+    </div>
+</div>

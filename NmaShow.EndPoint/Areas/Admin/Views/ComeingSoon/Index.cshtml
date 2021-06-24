@@ -1,0 +1,45 @@
+﻿@model List<NamaShow.Core.VeiwModels.ComeingSoonVM.IndexComeingSoon>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+<div class="card-body">
+    <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " href="~/Admin/ComeingSoon/Create">Create New</a></h4>
+    <h4 class="card-title">All ComeingSoon</h4>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Picture </th>
+                <th> Show </th>
+                <th> Edit </th>
+                <th> Delete </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td class="py-1">
+                        <img class="img-fluid" src="~/MovieFile/moviePicture/MoviePictureForList/@item.Picture">
+                    </td>
+                    <td>
+                        @item.Show
+                    </td>
+                    <td>
+                        <a href="~/Admin/ComeingSoon/Edit?id=@item.ComeingSoonId"> Edit </a>
+                    </td>
+                    <td>
+                        <a class="text-danger" href="~/Admin/ComeingSoon/Delete?id=@item.ComeingSoonId">Delete</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

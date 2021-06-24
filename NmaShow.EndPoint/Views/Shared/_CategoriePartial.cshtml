@@ -1,0 +1,11 @@
+﻿@using NamaShow.DataLayer.Entities.Categorie
+@using NamaShow.Core.Services.InterFaces;
+@inject ICategorieService CategorieService;
+
+@{
+    List<Categorie> x = CategorieService.ListOfCategorie();
+}
+@foreach (var item in x)
+{
+    <li><a href="~/Index?CatId=@item.CategorieId">@item.Title</a> </li>
+}

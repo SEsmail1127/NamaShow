@@ -1,0 +1,51 @@
+﻿@model NamaShow.Core.VeiwModels.Movie.MovieLink.EditMovieLinkForAdmin
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " asp-action="Index">Index</a></h4>
+                        <h4 class="card-title">Edit MovieLink</h4>
+
+                        <form asp-action="Edit" method="post" class="forms-sample" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="exampleInputName1">LinkName</label>
+                                <input type="text" class="form-control" asp-for="LinkName" placeholder="LinkName">
+                                <span class="validate-color" asp-validation-for="LinkName"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">LinkUrl</label>
+                                <input type="text" class="form-control" asp-for="LinkUrl" placeholder="LinkUrl">
+                                <span class="validate-color" asp-validation-for="LinkUrl"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputCity1">Price</label>
+                                <input type="text" class="form-control" asp-for="Price" placeholder="Price">
+                                <span class="validate-color" asp-validation-for="Price"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Show</label>
+                                <input type="checkbox" class="form-check" asp-for="Show">
+                                <span class="validate-color" asp-validation-for="Show"></span>
+                            </div>
+                            <input type="hidden" asp-for="MovieId" />
+                            <input type="hidden" asp-for="Id" />
+                            <button class="btn btn-success mr-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

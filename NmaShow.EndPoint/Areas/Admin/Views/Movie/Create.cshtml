@@ -1,0 +1,154 @@
+﻿@model NamaShow.Core.VeiwModels.MovieForAdminVM.CreateMovieByAdmin
+@using NamaShow.DataLayer.Entities.Movie
+@using NamaShow.DataLayer.Entities.Categorie
+@using NamaShow.Core.Services.InterFaces;
+@inject ICategorieService CategorieService;
+
+@{
+    List<Categorie> x = CategorieService.ListOfCategorie();
+    ViewData["Title"] = "Create";
+
+}
+@section Styles{
+
+}
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-8 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title btn btn-outline-primary btn-rounded btn-fw"> <a class="text-dark " asp-action="Index">Index</a></h4>
+                        <h4 class="card-title">Create Movie</h4>
+                        <form asp-action="Create" method="post" class="forms-sample" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label asp-for="MovieType" class="control-label"></label>
+                                <select asp-for="MovieType" id="MovieType" class="form-control" asp-items="Html.GetEnumSelectList<MovieType>()">
+                                    please select movie type
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Title</label>
+                                <input type="text" class="form-control" asp-for="Title" placeholder="Title">
+                                <span class="validate-color" asp-validation-for="Title"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Country</label>
+                                <input type="text" class="form-control" asp-for="country" placeholder="Country">
+                                <span class="validate-color" asp-validation-for="country"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Actors</label>
+                                <input type="text" class="form-control" asp-for="Actors" placeholder="Actors">
+                                <span class="validate-color" asp-validation-for="Actors"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Director</label>
+                                <input type="text" class="form-control" asp-for="Director" placeholder="Director">
+                                <span class="validate-color" asp-validation-for="Director"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">releaseTime</label>
+                                <input type="text" class="form-control" asp-for="releaseTime" placeholder="ReleseTime">
+                                <span class="validate-color" asp-validation-for="releaseTime"></span>
+                            </div>
+                            <div class="form-group" id="EndTime" style="display:none;overflow:hidden">
+                                <label for="exampleInputName1">EndTime</label>
+                                <input type="text" class="form-control" asp-for="EndTime" placeholder="EndTime">
+                                <span class="validate-color" asp-validation-for="EndTime"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputName1">Describe</label>
+                                <textarea type="text" class="form-control" asp-for="Describe" placeholder="Describe"></textarea>
+                                <span class="validate-color" asp-validation-for="Describe"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Movie Picture</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input type="file" style="display:none;" asp-for="MoviePicture" id="MoviePicture">
+                                    <span class="input-group-append">
+                                        <label class="file-upload-browse btn btn-info" for="MoviePicture" type="button">Upload</label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Movie Trailer</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input type="file" style="display:none;" asp-for="Trailer" id="Trailer">
+                                    <span class="input-group-append">
+                                        <label class="file-upload-browse btn btn-info" for="Trailer" type="button">Upload</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputName1">Categorie</label>
+                                <partial name="_CategorieList" />
+                                <input type="hidden" asp-for="ParentId" />
+                            </div>
+                            <button class="btn btn-success mr-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <img id="imgMovie" class="img-fluid" style="display:block;" src"#" />
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <video controls="controls">
+                            <source id="videoMovie" type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        function SerialChange() {
+            $("#EndTime").css({ "display": "block", "overflow": "hidden" })
+        }
+        function MovieChange() {
+            $("#EndTime").css({ "display": "none", "overflow": "hidden" })
+        }
+        $("#MovieType").change(function () {
+
+            let selectedNode = $("#MovieType").find(":selected").text();
+            if (selectedNode == "Serial")
+            {
+                SerialChange()
+            }
+
+            else {
+                MovieChange();
+            }
+        })
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgMovie').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#MoviePicture").change(function () {
+            readURL(this);
+        });
+    </script>
+}
